@@ -13,7 +13,7 @@ typedef OnTransformLinkFunction = String Function(String link);
 typedef OnTransformLinkAttributeFunction = LinkAttribute Function(String text);
 typedef OnDebugMatchFunction = void Function(Match match);
 
-class SelectableAutoLinkText extends StatefulWidget {
+class AutoLinkText extends StatefulWidget {
   /// Text to be auto link
   final String text;
 
@@ -31,91 +31,47 @@ class SelectableAutoLinkText extends StatefulWidget {
   /// Called when the user long-press on link.
   final OnOpenLinkFunction onLongPress;
 
-  /// Called when the user taps on non-link.
-  final GesturePointCallback onTapOther;
-
   /// Style of link text
   final TextStyle linkStyle;
 
   /// Style of highlighted link text
   final TextStyle highlightedLinkStyle;
 
-  /// {@macro flutter.material.SelectableText.focusNode}
-  final FocusNode focusNode;
-
-  /// {@macro flutter.material.SelectableText.style}
+  /// {@macro flutter.widget.Text.style}
   final TextStyle style;
 
-  /// {@macro flutter.material.SelectableText.strutStyle}
+  /// {@macro flutter.widget.Text.strutStyle}
   final StrutStyle strutStyle;
 
-  /// {@macro flutter.material.SelectableText.textAlign}
+  /// {@macro flutter.widget.Text.textAlign}
   final TextAlign textAlign;
 
-  /// {@macro flutter.material.SelectableText.textDirection}
+  /// {@macro flutter.widget.Text.textDirection}
   final TextDirection textDirection;
 
-  /// {@macro flutter.material.SelectableText.autofocus}
-  final bool autofocus;
-
-  /// {@macro flutter.material.SelectableText.maxLines}
+  /// {@macro flutter.widget.Text.maxLines}
   final int maxLines;
 
-  /// {@macro flutter.material.SelectableText.showCursor}
-  final bool showCursor;
-
-  /// {@macro flutter.material.SelectableText.cursorWidth}
-  final double cursorWidth;
-
-  /// {@macro flutter.material.SelectableText.cursorRadius}
-  final Radius cursorRadius;
-
-  /// {@macro flutter.material.SelectableText.cursorColor}
-  final Color cursorColor;
-
-  /// {@macro flutter.material.SelectableText.enableInteractiveSelection}
-  final bool enableInteractiveSelection;
-
-  /// {@macro flutter.material.SelectableText.dragStartBehavior}
-  final DragStartBehavior dragStartBehavior;
-
-  /// {@macro flutter.material.SelectableText.toolbarOptions}
-  final ToolbarOptions toolbarOptions;
-
-  /// {@macro flutter.material.SelectableText.scrollPhysics}
-  final ScrollPhysics scrollPhysics;
-
-  /// {@macro flutter.material.SelectableText.textWidthBasis}
+  /// {@macro flutter.widget.Text.textWidthBasis}
   final TextWidthBasis textWidthBasis;
 
   /// For debugging linkRegExp
   final OnDebugMatchFunction onDebugMatch;
 
-  SelectableAutoLinkText(
+  AutoLinkText(
     this.text, {
     Key key,
     String linkRegExpPattern,
     this.onTransformDisplayLink,
     this.onTap,
     this.onLongPress,
-    this.onTapOther,
     this.linkStyle,
     this.highlightedLinkStyle,
-    this.focusNode,
     this.style,
     this.strutStyle,
     this.textAlign,
     this.textDirection,
-    this.autofocus = false,
     this.maxLines,
-    this.showCursor = false,
-    this.cursorWidth = 2.0,
-    this.cursorRadius,
-    this.cursorColor,
-    this.enableInteractiveSelection = true,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.toolbarOptions,
-    this.scrollPhysics,
     this.textWidthBasis,
     this.onDebugMatch,
   })  : linkRegExp =
@@ -123,10 +79,10 @@ class SelectableAutoLinkText extends StatefulWidget {
         super(key: key);
 
   @override
-  _SelectableAutoLinkTextState createState() => _SelectableAutoLinkTextState();
+  _AutoLinkTextState createState() => _AutoLinkTextState();
 }
 
-class _SelectableAutoLinkTextState extends State<SelectableAutoLinkText> {
+class _AutoLinkTextState extends State<AutoLinkText> {
   final _gestureRecognizers = <TapAndLongPressGestureRecognizer>[];
 
   @override
@@ -137,27 +93,16 @@ class _SelectableAutoLinkTextState extends State<SelectableAutoLinkText> {
 
   @override
   Widget build(BuildContext context) {
-    return SelectableTextEx.rich(
+    return Text.rich(
       TextSpan(
         children: _createTextSpans(),
       ),
-      focusNode: widget.focusNode,
       style: widget.style,
       strutStyle: widget.strutStyle,
       textAlign: widget.textAlign,
       textDirection: widget.textDirection,
-      autofocus: widget.autofocus,
       maxLines: widget.maxLines,
-      showCursor: widget.showCursor,
-      cursorWidth: widget.cursorWidth,
-      cursorRadius: widget.cursorRadius,
-      cursorColor: widget.cursorColor,
-      enableInteractiveSelection: widget.enableInteractiveSelection,
-      dragStartBehavior: widget.dragStartBehavior,
-      toolbarOptions: widget.toolbarOptions,
-      scrollPhysics: widget.scrollPhysics,
       textWidthBasis: widget.textWidthBasis,
-      onTap: widget.onTapOther,
     );
   }
 

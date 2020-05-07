@@ -47,7 +47,7 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget _basic(BuildContext context) {
-    return SelectableAutoLinkText(
+    return AutoLinkText(
       'Basic\n'
       'Generate inline links that can be selected, tapped, '
       'long pressed and highlighted on tap.\n'
@@ -64,7 +64,7 @@ class MyHomePage extends StatelessWidget {
   }
 
   Widget _advanced(BuildContext context) {
-    return SelectableAutoLinkText(
+    return AutoLinkText(
       '''
 Advanced
 You can shrink url like https://github.com/miyakeryo/flutter_selectable_autolink_text
@@ -89,14 +89,11 @@ email: mail@example.com''',
         print('🍔LongPress: $url');
         Share.share(url);
       },
-      onTapOther: (point) {
-        print('🍇️onTapOther: $point');
-      },
     );
   }
 
   Widget _custom(BuildContext context) {
-    return SelectableAutoLinkText(
+    return AutoLinkText(
       'Custom links'
       '\nHi! @screen_name.'
       ' If you customize the regular expression, you can make them.'
@@ -131,7 +128,7 @@ email: mail@example.com''',
     final regExpPattern = r'\[([^\]]+)\]\(([^\s\)]+)\)';
     final regExp = RegExp(regExpPattern);
 
-    return SelectableAutoLinkText(
+    return AutoLinkText(
       '''
 More advanced usage
 
